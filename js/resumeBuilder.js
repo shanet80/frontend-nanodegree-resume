@@ -49,19 +49,22 @@ var education = {
       "name": "University of Phoenix",
       "datesAttended": "2013 - Anticipated 2016",
       "degree": "Bachelor of Science",
-      "major": "Information Technology"
+      "major": "Information Technology",
+      "location": "Phoenix, AZ"
     },
     {
       "name" : "University of Phoenix",
       "datesAttended": "2014 - 2015",
       "degree": "Certificate",
-      "major": "Advanced Software Engineering"
+      "major": "Advanced Software Engineering",
+      "location":"Phoenix, AZ"
     },
     {
       "name": "University of Phoenix",
       "datesAttended": "2013 - 2014",
       "degree": "Associates of Arts",
-      "major": "Information Technology with Specialization in Programming"
+      "major": "Information Technology with Specialization in Programming",
+      "location": "Phoenix, AZ"
     }
   ],
   "onlineCourses": [
@@ -69,37 +72,39 @@ var education = {
   ]
 };
 
-var formattedName = HTMLheaderName.replace("%data%", bio.name);
-var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
-// var formattedWelcomeMsg = HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage);
+bio.display = function(){
+  var formattedName = HTMLheaderName.replace("%data%", bio.name);
+  var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+  var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
+  var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 
-var formattedContactInfo = [];
-formattedContactInfo.push(HTMLmobile.replace("%data%", bio.contacts.mobile));
-formattedContactInfo.push(HTMLemail.replace("%data%", bio.contacts.email));
-formattedContactInfo.push(HTMLgithub.replace("%data%", bio.contacts.github));
-formattedContactInfo.push(HTMLtwitter.replace("%data%", bio.contacts.twitter));
+  var formattedContactInfo = [];
+  formattedContactInfo.push(HTMLmobile.replace("%data%", bio.contacts.mobile));
+  formattedContactInfo.push(HTMLemail.replace("%data%", bio.contacts.email));
+  formattedContactInfo.push(HTMLgithub.replace("%data%", bio.contacts.github));
+  formattedContactInfo.push(HTMLtwitter.replace("%data%", bio.contacts.twitter));
 
 
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
-$("#header").append(formattedBioPic);
-// $("#header").append(formattedWelcomeMsg);
+  $("#header").prepend(formattedRole);
+  $("#header").prepend(formattedName);
+  $("#header").append(formattedBioPic);
+  $("#header").append(formattedWelcomeMsg);
 
-if(bio.skills.length > 0) {
-	$("#header").append(HTMLskillsStart);
+  if(bio.skills.length > 0) {
+  	$("#header").append(HTMLskillsStart);
 
-	for(i in bio.skills) {
-		$("#skills").append(HTMLskills.replace("%data%", bio.skills[i]));
-	}
+  	for(i in bio.skills) {
+  		$("#skills").append(HTMLskills.replace("%data%", bio.skills[i]));
+  	}
+  }
+
+  for(i in formattedContactInfo) {
+  	$("#topContacts").append(formattedContactInfo[i]);
+  	$("#footerContacts").append(formattedContactInfo[i]);
+  }
 }
 
-for(i in formattedContactInfo) {
-	$("#topContacts").append(formattedContactInfo[i]);
-	$("#footerContacts").append(formattedContactInfo[i]);
-}
-
-function displayWork() {
+work.display = function() {
 
 	if(work.jobs.length > 0) {
 
@@ -122,8 +127,6 @@ function displayWork() {
 	}
 }
 
-displayWork();
-
 education.display = function() {
 	if(education.schools.length > 0 || education.onlineCourses.length > 0) {
 		for(i in education.schools) {
@@ -133,10 +136,12 @@ education.display = function() {
 			var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[i].degree);
 			var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[i].datesAttended);
 			var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[i].major);
+      var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[i].location);
 
 			$(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree);
 			$(".education-entry:last").append(formattedSchoolDates);
 			$(".education-entry:last").append(formattedSchoolMajor);
+      $(".education-entry:last").append(formattedSchoolLocation);
 		}
 
 		if(education.onlineCourses.length > 0) {
@@ -157,6 +162,8 @@ education.display = function() {
 	}
 }
 
+bio.display();
+work.display();
 education.display();
 
 $(document).click(function(loc) {
