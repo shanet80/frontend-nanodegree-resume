@@ -9,7 +9,7 @@ var bio = {
     "location" : "New Castle, PA"
   },
   "skills" : [
-    "HTML", "CSS",  "JavaScript", "Python", "Java",
+    "HTML", "CSS",  "JavaScript", "Bootstrap", "Python", "Java",
     "VB.NET", "C#", "C/C++", "R", "Visual Studio", "Eclipse",
     "Customer Service", "Communications"
   ],
@@ -24,21 +24,21 @@ var work = {
       "title": "Customer Service Representative",
       "datesWorked": "March 2015 - Present",
       "location": "New Castle, PA",
-      "description": "Agent"
+      "description": "<ul><li>Counsel and service policy holders in making changes to their existing policies for Home, Auto and Liability</li> <li>Educate customers on additional lines of coverage which may be beneficial to them</li> <li>Collaborated on several problem solving and pilot programs to increase process efficiency</li> <li>Provided thorough customer service leading to first call resolution far exceeding center average</li></ul>"
     },
     {
       "employer": "Randstad",
       "title": "Unlicensed Billing Specialist at Liberty Mutual",
       "datesWorked": "October 2014 - March 2015",
       "location": "New Castle, PA",
-      "description": "Biller"
+      "description": "<ul><li>Communicated information clearly and accurately</li> <li>Provided service for policy holders making payments and with third party changes</li> <li>Awarded multiple customer commendations</li></ul>"
     },
     {
       "employer" : "AT&T",
       "title": "Telecommunications Relay Associate",
       "datesWorked": "October 2003 - June 2014",
       "location": "New Castle, PA",
-      "description": "Helper of deaf peoples"
+      "description": "<ul><li>Awarded 4 customer commendations within the first year</li> <li>Transcribe live telephone conversations for the hearing impaired</li> <li>Received continuous customer service training</li></ul>"
     }
   ]
 };
@@ -50,25 +50,39 @@ var education = {
       "datesAttended": "2013 - Anticipated 2016",
       "degree": "Bachelor of Science",
       "major": "Information Technology",
-      "location": "Phoenix, AZ"
+      "location": "Phoenix, AZ",
+      "description": "Classes in Business Systems Included team assignments in each class to simulate working environments"
     },
     {
       "name" : "University of Phoenix",
       "datesAttended": "2014 - 2015",
       "degree": "Certificate",
       "major": "Advanced Software Engineering",
-      "location":"Phoenix, AZ"
+      "location":"Phoenix, AZ",
+      "description": "Classes in Java, Software Engineering, Software Architecture, VB.Net, and C#. Included team assignments ranging from creating application design documentation to developing a full working customer relation management application as a team."
     },
     {
       "name": "University of Phoenix",
       "datesAttended": "2013 - 2014",
       "degree": "Associates of Arts",
       "major": "Information Technology with Specialization in Programming",
-      "location": "Phoenix, AZ"
+      "location": "Phoenix, AZ",
+      "description": "Included classes in Java, C++, and Web Design"
     }
   ],
   "onlineCourses": [
-
+    {
+      "title": "Front-End Developer Nanodegree",
+      "school": "Udacity",
+      "completed": "2015",
+      "url": "https://www.udacity.com"
+    },
+    {
+      "title": "R Programming",
+      "school": "Coursera - Johns Hopkins",
+      "completed": "May 2015",
+      "url": "https://www.coursera.org/account/accomplishments/records/t2mZP7YPCXmdtVyQ"
+    }
   ]
 };
 
@@ -162,15 +176,17 @@ education.display = function() {
 	}
 }
 
+function inName() {
+    var name = $("#name").html();
+    name = name.trim().split(" ");
+    name[0] = name[0].slice(0, 1).toUpperCase() + name[0].slice(1).toLowerCase();
+    name[1] = name[1].toUpperCase();
+    return name[0] + " " + name[1];
+}
+
 bio.display();
 work.display();
 education.display();
 
-$(document).click(function(loc) {
-  var x = loc.pageX;
-  var y = loc.pageY;
-
-  logClicks(x,y);
-});
-
-$("#mapDiv").append(googleMap);
+$('#main').append(internationalizeButton);
+$('#mapDiv').append(googleMap);
